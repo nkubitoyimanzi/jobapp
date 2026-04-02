@@ -26,23 +26,37 @@ export default function JobsPage() {
   }, []);
 
   return (
-    <div className="p-6">
-      <h1 className="text-2xl font-bold mb-4">Jobs</h1>
+    <div className="p-6 min-h-screen bg-black/80 text-white/40">
+      {/* Title */}
+      <h1 className="text-3xl font-bold mb-6 text-white/60">
+        Jobs
+      </h1>
 
-      {loading && <p>Loading jobs...</p>}
-      {error && <p className="text-red-500">{error}</p>}
-      {!loading && !error && jobs.length === 0 && <p>No jobs found.</p>}
+      {/* Loading */}
+      {loading && <p className="mb-4">Loading jobs...</p>}
 
-      {!loading &&
-        !error &&
-        jobs.map((job) => (
-          <Card
-            key={job.id}
-            id={job.id}
-            title={job.title}
-            description={job.description}
-          />
-        ))}
+      
+      {error && <p className="mb-4 text-red-500/70">{error}</p>}
+
+      {/* Empty */}
+      {!loading && !error && jobs.length === 0 && (
+        <p>No jobs found.</p>
+      )}
+
+      {/* Jobs Grid */}
+      <div className="grid grid-cols-4 gap-6">
+        {!loading &&
+          !error &&
+          jobs.map((job) => (
+            <div key={job.id} className="">
+              <Card
+                id={job.id}
+                title={job.title}
+                description={job.description}
+              />
+            </div>
+          ))}
+      </div>
     </div>
   );
 }

@@ -30,15 +30,49 @@ export default function JobDetails() {
       .finally(() => setLoading(false));
   }, [id]);
 
-  if (loading) return <p className="p-6">Loading job...</p>;
-  if (error) return <p className="p-6 text-red-500">{error}</p>;
-  if (!job) return <p className="p-6">Job not found</p>;
+  // Loading state
+  if (loading)
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-black/80 text-white/40">
+        Loading job...
+      </div>
+    );
+
+  // Error state
+  if (error)
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-black/80 text-red-500/70">
+        {error}
+      </div>
+    );
+
+  // No job found
+  if (!job)
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-black/80 text-white/40">
+        Job not found
+      </div>
+    );
 
   return (
-    <div className="p-6">
-      <h1 className="text-2xl font-bold mb-2">{job.title}</h1>
-      <p className="text-gray-700 mb-2">{job.description}</p>
-      <p className="text-sm text-gray-500">Job ID: {job.id}</p>
+    <div className="min-h-screen flex items-center justify-center bg-black/80 p-6">
+      <div className="bg-black/70 backdrop-blur-md rounded-3xl p-8 w-full max-w-xl shadow-lg">
+        
+        {/* Title */}
+        <h1 className="text-3xl font-semibold mb-4 text-white/60">
+          {job.title}
+        </h1>
+
+        {/* Description */}
+        <p className="text-white/40 mb-6 leading-relaxed">
+          {job.description}
+        </p>
+
+        {/* ID */}
+        <p className="text-sm text-white/30">
+          Job ID: {job.id}
+        </p>
+      </div>
     </div>
   );
 }

@@ -9,6 +9,8 @@ type CardProps = {
 };
 
 export function Card({ id, title, description }: CardProps) {
+  
+
   const router = useRouter();
 
   const handleDelete = async () => {
@@ -16,7 +18,9 @@ export function Card({ id, title, description }: CardProps) {
       method: "DELETE",
     });
 
-window.location.reload();   };
+    // Better than reload
+    router.refresh();
+  };
 
   return (
     <div className="border p-4 mb-4 rounded shadow hover:shadow-lg transition">
@@ -28,7 +32,14 @@ window.location.reload();   };
           className="px-3 py-1 bg-blue-500 text-white rounded"
           onClick={() => router.push(`/jobs/${id}`)}
         >
-          View Job
+          View
+        </button>
+
+        <button
+          className="px-3 py-1 bg-yellow-500 text-white rounded"
+          onClick={() => router.push(`/jobs/edit/${id}`)}
+        >
+          Edit
         </button>
 
         <button
